@@ -18,7 +18,7 @@ we can deploy on AWS, GCP, Azure or on-premise, the application remains consiste
 It consists of master node and sets of worker nodes. Control plane runs on master node, applications runs on worker nodes.
 
 
-![Alt text](img/componentes.png?raw=true "Kubernetes")
+![Alt text](img/components.png?raw=true "Kubernetes components")
 
 
 In simple terms Kubernetes is nothing but a database fronted by API server. API server is the policy engine that sits in front of etcd, a distributed database that holds the cluster state. Controller manager is set control loops that ensure the actual state in cluster matches desired state stored in database.
