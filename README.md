@@ -4,7 +4,7 @@
 
 [Kubernetes Kops cluster on AWS](./kubernetes-kops.md)
 
-[Kubernetes Overview](./kubernetes-kops.md)
+[Kubernetes Overview](./kubernetes-overview.md)
 
 [Authentication and Authorization in Kubernetes](./auth-authz.md)
 
