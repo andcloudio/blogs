@@ -9,7 +9,7 @@ It basically serves four objectives
 
 Kubernetes is API driven, container centric system. It is one of the most active open source project with close to 2000 contributors. It is written in Go. It abstracts the cluster implementation from workloads. So applications can be written once run on any cloud provider or on-premise.
 
-![](https://i.imgur.com/w2UupMU.png)
+![Alt text](img/kubernetes01.png?raw=true "Kubernetes")
 
 
 we can deploy on AWS, GCP, Azure or on-premise, the application remains consistent across the deployments.
@@ -18,7 +18,7 @@ we can deploy on AWS, GCP, Azure or on-premise, the application remains consiste
 It consists of master node and sets of worker nodes. Control plane runs on master node, applications runs on worker nodes.
 
 
-![](https://i.imgur.com/WJqmJvK.png)
+![Alt text](img/componentes.png?raw=true "Kubernetes")
 
 
 In simple terms Kubernetes is nothing but a database fronted by API server. API server is the policy engine that sits in front of etcd, a distributed database that holds the cluster state. Controller manager is set control loops that ensure the actual state in cluster matches desired state stored in database.
