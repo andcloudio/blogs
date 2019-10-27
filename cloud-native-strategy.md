@@ -48,7 +48,7 @@ Change is best when it is small and frequent, coupled with automatic testing of 
 
 CI establishes a consistent and automated way to build, package, and test applications. CD automates the delivery of applications package into multiple environments like Dev, QA, Staging, Production.
 
-![Alt text](img/12app.png?raw=true "Cloud-Native Application Development and Deployment")
+![Alt text](img/cicd.png?raw=true "Continuous Integration / Continuous Delivery")
 
 Currently there are many tools evolving to provide cloud native CI/CD.
 
@@ -62,7 +62,7 @@ Visit https://github.com/cncf/landscape to view cloud native landscape
 
 ## A opinionated Cloud Native Stack:
 
-![Alt text](img/cicd.png?raw=true "Cloud-Native Application Development and Deployment")
+![Alt text](img/stack.png?raw=true "Cloud-Native Stack")
 
 ## Orchestration and Management
 
