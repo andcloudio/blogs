@@ -62,7 +62,7 @@ Visit https://github.com/cncf/landscape to view cloud native landscape
 
 ## A opinionated Cloud Native Stack:
 
-![Alt text](img/12app.png?raw=true "Cloud-Native Application Development and Deployment")
+![Alt text](img/cicd.png?raw=true "Cloud-Native Application Development and Deployment")
 
 ## Orchestration and Management
 
