@@ -144,6 +144,6 @@ kubectl get cert
 
 wait for certificate status to become ready.
 
-## Point the browser to https://<dnsname>
+## Point the browser to 'https://<dnsname>'
 
 we need to see web server available on https.
