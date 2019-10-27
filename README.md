@@ -8,3 +8,4 @@
 
 [Authentication and Authorization in Kubernetes](./auth-authz.md)
 
+[kubernetes + ingress + cert-manager + letsencrypt = https](./ingress-https.md)
