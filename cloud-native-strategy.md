@@ -12,7 +12,7 @@ When companies build and operate applications in a cloud-native fashion, they br
 
 ## Cloud-Native Application Development and Deployment
 
-<img src="./img/cloudnative.jpeg" alt="" width="400" align="middle"/>
+<img src="./img/cloudnative.jpeg" alt="" width="400"/>
 
 
 ### Service Based Architecture
@@ -63,7 +63,7 @@ Visit https://github.com/cncf/landscape to view cloud native landscape
 
 ## A opinionated Cloud Native Stack:
 
-![Alt text](img/stack.png?raw=true "Cloud-Native Stack")
+<img src="./img/stack.png" alt="" width="800"/>
 
 ## Orchestration and Management
 
