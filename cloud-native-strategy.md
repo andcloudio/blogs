@@ -12,7 +12,7 @@ When companies build and operate applications in a cloud-native fashion, they br
 
 ## Cloud-Native Application Development and Deployment
 
-![Alt text](img/boxes.001.jpeg?raw=true "Cloud-Native Application Development and Deployment")
+![Alt text](img/cloudnative.jpeg?raw=true "Cloud-Native Application Development and Deployment")
 
 ### Service Based Architecture
 
@@ -22,7 +22,7 @@ Each microservice can be deployed, upgraded, scaled, and restarted independent o
 
 Applications are designed with 12-factor app principles.
 
-![]( image img/12app.png) 
+![Alt text](img/12app.png?raw=true "Cloud-Native Application Development and Deployment")
 
 ### Container-Based Infrastructure
 
@@ -48,7 +48,7 @@ Change is best when it is small and frequent, coupled with automatic testing of 
 
 CI establishes a consistent and automated way to build, package, and test applications. CD automates the delivery of applications package into multiple environments like Dev, QA, Staging, Production.
 
-![]( image img/12app.png) 
+![Alt text](img/12app.png?raw=true "Cloud-Native Application Development and Deployment")
 
 Currently there are many tools evolving to provide cloud native CI/CD.
 
@@ -62,7 +62,7 @@ Visit https://github.com/cncf/landscape to view cloud native landscape
 
 ## A opinionated Cloud Native Stack:
 
-![]( image img/stack.png) 
+![Alt text](img/12app.png?raw=true "Cloud-Native Application Development and Deployment")
 
 ## Orchestration and Management
 
@@ -79,7 +79,7 @@ Kubernetes enables:
 - Provide native methods of service discovery
 - Use the SAMEAPI across bare metal and EVERY cloud provider!!!
 
-![]( image img/kubernetes01.png) 
+![Alt text](img/kubernetes01.png?raw=true "Kubernetes")
 
 Cluster auto-scaling is used to dynamically control number of compute instances used by cluster based on load. Authentication, Role based access control, Pod security policy and Network policies are used add the security layer for cluster.
 
@@ -109,7 +109,8 @@ Velero gives tools to back up and restore your Kubernetes cluster resources and 
 
 Canal is just combination of network plugins Flannel and Project calico. Flannel provides the vxlan overlay network for pod communication across the nodes. Project calico can be used for implementation of network policy.
 
-![]( image img/network.png) 
+![Alt text](img/network.png?raw=true "Canal")
+
 
 ## Service Mesh
 
@@ -126,7 +127,7 @@ Automatic load balancing for HTTP, gRPC, WebSocket, and TCP traffic.
 
 - Secure service-to-service communication in a cluster with strong identity-based authentication and authorization.
 
-![]( image img/istio.png) 
+![Alt text](img/istio.png?raw=true "Istio")
 
 ## Monitoring and Alerting
 
@@ -140,7 +141,7 @@ The Prometheus ecosystem consists
 - Client libraries for instrumenting application code
 - Alertmanager to handle alerts, filter and send notifications to pagerduty, email, slack.
 
-![]( image img/prometheus.jpeg) 
+![Alt text](img/prometheus.jpeg?raw=true "Prometheus")
 
 ## Logging
 
