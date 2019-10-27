@@ -60,15 +60,18 @@ kubectl create rolebinding user-bob \
 
 ```sh
 APISERVER=$(kubectl config view --minify | grep server | cut -f 2- -d ":" | tr -d " ")
+
 kubectl config set-cluster test-cluster \
   --insecure-skip-tls-verify=true \
   --server=$APISERVER \
   --kubeconfig=bob.kubeconfig
+
 kubectl config set-credentials bob \
   --client-certificate=bob.crt \
   --client-key=bob.key \
   --embed-certs=true \
   --kubeconfig=bob.kubeconfig
+
 kubectl config set-context bob \
   --cluster=test-cluster \
   --user=bob \
@@ -82,6 +85,7 @@ Bob should be able to create deployments in namespace ns-bob
 
 ```sh
 export KUBECONFIG=bob.kubeconfig
+
 kubectl create deployment busybox --image=busybox 
 kubectl get deployment,rs,pod
 ```
@@ -90,6 +94,7 @@ If Bob tries to use any cluster scope resource, it should be forbidden
 
 ```sh
 kubectl get nodes
+
 Error from server (Forbidden): nodes is forbidden: User "bob" cannot list nodes at the cluster scope
 ```
 
