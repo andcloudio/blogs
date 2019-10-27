@@ -109,7 +109,7 @@ Velero gives tools to back up and restore your Kubernetes cluster resources and 
 
 Canal is just combination of network plugins Flannel and Project calico. Flannel provides the vxlan overlay network for pod communication across the nodes. Project calico can be used for implementation of network policy.
 
-![Alt text](img/network.png?raw=true "Canal")
+![Alt text](img/network.jpeg?raw=true "Canal")
 
 
 ## Service Mesh
@@ -127,7 +127,7 @@ Automatic load balancing for HTTP, gRPC, WebSocket, and TCP traffic.
 
 - Secure service-to-service communication in a cluster with strong identity-based authentication and authorization.
 
-![Alt text](img/istio.png?raw=true "Istio")
+![Alt text](img/istio.jpeg?raw=true "Istio")
 
 ## Monitoring and Alerting
 
