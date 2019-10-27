@@ -63,7 +63,7 @@ Visit https://github.com/cncf/landscape to view cloud native landscape
 
 ## A opinionated Cloud Native Stack:
 
-<img src="./img/stack.png" alt="" width="800"/>
+<img src="./img/stack.png" alt="" width="600"/>
 
 ## Orchestration and Management
 
