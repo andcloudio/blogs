@@ -12,7 +12,8 @@ When companies build and operate applications in a cloud-native fashion, they br
 
 ## Cloud-Native Application Development and Deployment
 
-![Alt text](img/cloudnative.jpeg =300x300 "Cloud-Native Application Development and Deployment")
+<img src="./img/cloudnative.jpeg=300x300" alt="" width="200"/>
+
 
 ### Service Based Architecture
 
