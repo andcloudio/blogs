@@ -12,7 +12,7 @@ When companies build and operate applications in a cloud-native fashion, they br
 
 ## Cloud-Native Application Development and Deployment
 
- ![]( image img/boxes.001.jpeg) 
+[[https://github.com/andcloudio/blogs/edit/master/img/boxes.001.jpeg|alt=octocat]
 
 ### Service Based Architecture
 
