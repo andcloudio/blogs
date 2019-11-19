@@ -1,4 +1,4 @@
-# The Production-Grade Infrastructure Checklist
+# Production-Grade Infrastructure Checklist
 
 - Install the software binaries and all dependencies. 
 
