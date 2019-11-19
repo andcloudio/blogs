@@ -2,7 +2,7 @@
 
 [Building Cloud Native Strategy](./cloud-native-strategy.md)
 
-[The Production-Grade Infrastructure Checklist](./prod-checklist.md)
+[Production-Grade Infrastructure Checklist](./prod-checklist.md)
 
 [Kubernetes Kops cluster on AWS](./kubernetes-kops.md)
 
