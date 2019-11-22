@@ -1,4 +1,4 @@
-# andcloud.io Blogs
+# andcloud.io blogs
 
 [Building Cloud Native Strategy](./cloud-native-strategy.md)
 
