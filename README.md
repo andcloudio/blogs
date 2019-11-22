@@ -12,5 +12,7 @@
 
 [kubernetes + ingress + cert-manager + letsencrypt = https](./ingress-https.md)
 
+[AWS resource cleanup tools](./aws-resource-cleanup-tools.md)
+
 
 
