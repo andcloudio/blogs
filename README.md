@@ -18,3 +18,4 @@
 
 [Securing Web App](./securing-web-app.md)
 
+[Securing Cloud Infra](./securing-cloud-infra.md)
