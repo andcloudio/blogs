@@ -11,7 +11,9 @@ Lets take a simple hello world example and walk through the work flow.
 ## Required Installations:
 
 Virtual Box: https://www.virtualbox.org/wiki/Downloads
+
 Minikube: https://kubernetes.io/docs/tasks/tools/install-minikube/
+
 Skaffold: https://skaffold.dev/docs/install/
 
 ## Start minikube
