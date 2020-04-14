@@ -1,6 +1,6 @@
 # CI/CD with Cloud Build
 
-Continous Integration and Continous Deployment (CI/CD) pipelines are designed to take the code from 'git push' to Build, Test, Deploy in production. There is a moving from having a single big build server to cloud native scaleable platforms. 
+Continous Integration and Continous Deployment (CI/CD) pipelines are designed to take the code from 'git push' to Build, Test and Deploy in production. There is a moving from having a single big build server to cloud native scaleable platforms. 
 
 Cloud Build is a managed service on Google Cloud that can be used to Build, Test and Deploy application. 
 
