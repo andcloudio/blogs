@@ -97,7 +97,7 @@ gcloud iam service-accounts add-iam-policy-binding \
   --role="roles/iam.serviceAccountUser"
 ```
 
-## Allow unauthenticated access to service on cloud run
+## Allow unauthenticated access to demo-app service on cloud run
 
 ```bash
 gcloud run services add-iam-policy-binding demo-app \
