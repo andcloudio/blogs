@@ -19,3 +19,6 @@
 [Securing Web App](./securing-web-app.md)
 
 [Securing Cloud Infra](./securing-cloud-infra.md)
+
+[Increase Developer Productivity with skaffold](./increase-dev-prod-skaffold.md)
+
