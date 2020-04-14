@@ -87,15 +87,14 @@ In this config file we have 'demo-app' as the service name and us-central1 as th
 ```bash
 PROJECT_NUMBER="$(gcloud projects describe ${PROJECT_ID} --format='get(projectNumber)')"
 
+gcloud projects add-iam-policy-binding ${PROJECT_NUMBER} \
+  --member=serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
+  --role=roles/run.admin
+  
 gcloud iam service-accounts add-iam-policy-binding \
   ${PROJECT_NUMBER}-compute@developer.gserviceaccount.com \
   --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
   --role="roles/iam.serviceAccountUser"
-
-
-gcloud projects add-iam-policy-binding ${PROJECT_NUMBER} \
-  --member=serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
-  --role=roles/run.admin
 ```
 
 ## Allow unauthenticated access to service on cloud run
