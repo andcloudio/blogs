@@ -1,6 +1,6 @@
 # CI/CD with Cloud Build
 
-Continous Integration and Continous Deployment (CI/CD) systems are designed to take code from 'git push' to deploying in production. Developer community is moving from having a single big build server to cloud native scalable platforms. 
+Continous Integration and Continous Deployment (CI/CD) systems are designed to take code from 'git push' to deploying in production. Developer community is moving from having a single big build server to cloud native scaleable platforms. 
 
 Cloud Build is a managed service on Google Cloud that can be used to Build, Test and Deploy application. 
 
