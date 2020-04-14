@@ -1,14 +1,14 @@
 # CI/CD with Cloud Build
 
-Continous Integration and Continous Deployment (CI/CD) pipelines are designed to take the code from 'git push' to Build, Test and Deploy in production. There is a move from having a single big build server to cloud native scaleable platforms. 
+Continous Integration and Continous Deployment (CI/CD) pipelines are designed to take the Code from 'git push' to Build, Test and Deploy. We used to have single big build server for Continuous Integration, but that is changing to cloud native scaleable platforms.
 
-Cloud Build is a managed service on Google Cloud that can be used to Build, Test and Deploy application. 
+Cloud Build is a managed service on Google Cloud that can be used to Build, Test and Deploy on cloud. 
 
 Cloud Build can import the source code from GitHub or Bitbucket, execute build as per your specification and produce artifacts such as Docker containers or Java archives.
 
 Build steps are run in a Docker container.
 
-We can configure builds to fetch dependencies, run unit tests, static analyses, and integration tests, and create artifacts with build tools such as docker, gradle, maven, bazel, and gulp.
+We can configure builds to fetch dependencies, run unit tests, static analysis, and integration tests, and create artifacts with build tools such as docker, gradle, maven, bazel, and gulp.
 
 We can deploy artifacts on multiple environments like Compute Engine VM instances, Google Kubernetes Engine, App Engine, Cloud Functions and Cloud Run. 
 
@@ -110,6 +110,7 @@ gcloud run services add-iam-policy-binding demo-app \
 ```
 
 ## commit the changes to GitHub repository.
+This triggers build on Cloud Build.
 
 ## View build results
 
