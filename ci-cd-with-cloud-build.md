@@ -1,6 +1,6 @@
 # CI/CD with Cloud Build
 
-Continous Integration and Continous Deployment (CI/CD) pipelines are designed to take the code from 'git push' to Build, Test and Deploy in production. There is a moving from having a single big build server to cloud native scaleable platforms. 
+Continous Integration and Continous Deployment (CI/CD) pipelines are designed to take the code from 'git push' to Build, Test and Deploy in production. There is a move from having a single big build server to cloud native scaleable platforms. 
 
 Cloud Build is a managed service on Google Cloud that can be used to Build, Test and Deploy application. 
 
@@ -14,9 +14,11 @@ We can deploy artifacts on multiple environments like Compute Engine VM instance
 
 In this blog we will look into simple workflow with <b>GitHub, Cloud Build, Google Container Registry and Cloud Run.</b> 
 
-## Connect GitHub repository with Google cloud project & Create Push Triggers
+## Enable API's in the Google Cloud Project
 
 - Enable Cloud Build API and Cloud Run API.
+
+## Connect GitHub repository with Google Cloud Project & Create Push Triggers
 
 - Follow the steps from this link
 
@@ -51,7 +53,7 @@ CMD ["/app/app.py"]
 
 ## Setting up continuous deployment with Cloud Build
 
-In the build config file we specify the steps for Cloud Build, to build the container image using Docker, Push the container image to Google Container Registry and then deploy the container on Cloud Run. 
+In the build config file we specify the steps for Cloud Build. 
 
 cloudbuild.yaml
 
@@ -111,9 +113,9 @@ gcloud run services add-iam-policy-binding demo-app \
 
 ## View build results
 
-- In the Cloud Console, the Build History menu shows information about a build's status.
+- In the Cloud Console, Cloud Build --> Build History menu shows information about a build's status.
 
-- Click on Build Log. In the log, URL link of the deployed container is given.
+- If the build is success, in Build Log we can see URL link of the deployed container. By clicking on the link we can access the deployed demo-app service.
 
 ## Summary
 
