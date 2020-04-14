@@ -16,11 +16,11 @@ In this blog we will look into simple workflow with <b>GitHub, Cloud Build, Goog
 
 ## Enable API's in the Google Cloud Project
 
-- Enable Cloud Build API and Cloud Run API.
+Enable Cloud Build API and Cloud Run API.
 
 ## Connect GitHub repository with Google Cloud Project & Create Push Triggers
 
-- Follow the steps from this link
+Follow the steps from this link
 
 https://cloud.google.com/cloud-build/docs/automating-builds/run-builds-on-github#installing_the_google_cloud_build_app
 
@@ -113,9 +113,11 @@ gcloud run services add-iam-policy-binding demo-app \
 
 ## View build results
 
-- In the Cloud Console, Cloud Build --> Build History menu shows information about a build's status.
+In the Cloud Console, Cloud Build --> Build History menu shows information about a build's status.
 
-- If the build is success, in Build Log we can see URL link of the deployed container. By clicking on the link we can access the deployed demo-app service.
+## Access the demo-app service.
+
+If the build is success, in Build Log we can see URL link of the deployed container. 
 
 ## Summary
 
