@@ -121,6 +121,3 @@ gcloud run services add-iam-policy-binding demo-app \
 - Cloud Build provides a platform for continuous build, test and deploy. 
 
 - We can keep CI/CD pipelines and deployment environment inside a single security perimeter.
-
-
-
