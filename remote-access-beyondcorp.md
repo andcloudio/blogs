@@ -8,7 +8,7 @@ BeyondCorp is a security model from Google, where corporate apps are moved to in
 
 ![Alt text](img/beyond-remote-access.png?raw=true "Beyond Remote Access")
 
-In this blog we will look into remote access of on-premises apps.
+In this blog we will look varies components involved in BeyondCorp Remote Access to on-premises apps.
 
 Building Blocks of BeyondCorp Remote Access are Cloud Identity, Cloud Identity-Aware Proxy, Context-Aware Access, Cloud IAM, Cloud Interconnect/Cloud VPN, IAP Connector and VPC Service Controls.
 
@@ -21,7 +21,9 @@ Google Cloud uses Google Accounts for authentication and access management. If t
 
 Access Context Manager provides granular access controls based on attributes like user identity, device type, operating system, geo-location, IP address, time of day, request path and more.
 
-Endpoint Verification enables to build an inventory of devices that are accessing corporate apps. It provides overview of security posture of devices. Endpoint Verification consists of a Chrome extension installed on corporate devices. Employees can also install it on their unmanaged, personal devices. This extension gathers and reports device information, constantly syncing with Google Cloud. This information is used in finer access control.
+Endpoint Verification enables to build an inventory of devices that are accessing corporate apps. It provides overview of security posture of devices. 
+
+Endpoint Verification consists of a Chrome extension installed on corporate devices. Employees can also install it on their unmanaged, personal devices. This extension gathers and reports device information, constantly syncing with Google Cloud. This information is used for finer access control.
 
 ![Alt text](img/endpoint-verification-flow.png?raw=true "endpoint-verification-flow")
 
@@ -32,7 +34,7 @@ On-premises network is extended to Google Cloud VPC network via Dedicated Interc
 
 ## Setup of Authentication and Authorization Layer
 
-Cloud Identity-Aware Proxy(IAP) is HTTPS Load Balancer that performs authentication and authorization. User connects to this proxy to access corporate applications. IAP works with signed headers to secure applications. Users are added as Members to HTTPS Resources in IAP, with IAM Roles to grant access. 
+Cloud Identity-Aware Proxy(IAP) is HTTPS Load Balancer that performs authentication and authorization. User connects to this proxy to access corporate apps. Users are added as Members to HTTPS Resources in IAP, with appropriate IAM Roles to grant access. 
 
 
 ![Alt text](img/iap-on-prem.png?raw=true "iap-on-prem")
@@ -46,15 +48,15 @@ IAP Connector is used to route traffic secured by Cloud IAP to on-premises app. 
 
 ## DNS
 
-Public domain names are created for internal on-premises app and mapped to IAP Proxy IP address. Entries are created in domain manager. These url's are used by user to connect to corporate apps.
+Public domain names are created for internal on-premises app and mapped to IAP Proxy IP address.  These domain names are used by users to connect to corporate apps.
 
 
 ## Conclusion:
 
-With work force going mobile, BeyondCorp model of security provides uniform user experience between local and remote access to enterprise resources.
+With workforce going mobile, BeyondCorp model of security provides uniform user experience between local and remote access to enterprise resources.
 
 
-## Diagrams from: 
+Diagrams from: 
 
 https://cloud.google.com/solutions/beyondcorp-remote-access
 
