@@ -32,12 +32,12 @@ On-premises network is extended to Google Cloud VPC network via Dedicated Interc
 
 ## Setup of Authentication and Authorization Layer
 
-HTTPS Load Balancer with Cloud Identity-Aware Proxy(IAP) is created. User connects to this proxy to access corporate applications. IAP performs authentication and authorization. IAP works with signed headers to secure applications.
+HTTPS Load Balancer with Cloud Identity-Aware Proxy(IAP) is created. User connects to this proxy to access corporate applications. IAP performs authentication and authorization. IAP works with signed headers to secure applications. Users are added as Members to HTTPS Resources in IAP, with IAM Role - 'IAP-secured Web App User' to grant access. 
+
 
 ![Alt text](img/iap-on-prem.png?raw=true "iap-on-prem")
 
 
-We add users as Members to HTTPS Resources in IAP, with IAM Role - 'IAP-secured Web App User' to grant access. 
 
 
 ## Route Traffic to on-premises network
