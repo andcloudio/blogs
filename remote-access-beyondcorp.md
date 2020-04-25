@@ -4,7 +4,7 @@
 
 Traditionally companies have relied on perimeter security with firewall guarding the entry and exit of traffic into corporate network. With companies adopting cloud and workforce going mobile, this perimeter has become difficult to enforce. 
 
-BeyondCorp is a security model from Google, where corporate apps are moved to internet, access is based on user and device credentials, user's network location can be at enterprise location, a home network or a coffee shop.  All access is authenticated, authorized and encrypted. There is no need for traditional VPN connection.
+BeyondCorp is a security model from Google, where corporate apps are moved to internet, access is based on user and device credentials, user's network location can be at enterprise location, a home network or a coffee shop, the authentication and authorization layer remains common. There is no need for traditional VPN connection.
 
 ![Alt text](img/beyond-remote-access.png?raw=true "Beyond Remote Access")
 
