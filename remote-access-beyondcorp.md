@@ -15,13 +15,13 @@ Building Blocks of BeyondCorp Remote Access are Cloud Identity, Cloud Identity-A
 
 ## User Identities
 
-Google Cloud uses Google Accounts for authentication and access management. If we have existing on-premises identity management system like Active Directory then we sync usernames to Cloud Identity using Google Cloud Directory Sync to create Google Accounts. Passwords are not synced, instead SAML SSO is implemented to authenticate Users with existing on-premises identity management system.
+Google Cloud uses Google Accounts for authentication and access management. If there is an existing on-premises identity management system like Active Directory then usernames are synced to Cloud Identity using Google Cloud Directory Sync. Passwords are not synced, instead SAML SSO is implemented to authenticate Users with existing on-premises identity management system.
 
 ## Context-Aware access 
 
 Access Context Manager provides granular access controls based on attributes like user identity, device type, operating system, geo-location, IP address, time of day, request path and more.
 
-Endpoint Verification enables to build an inventory of devices that are accessing corporate apps. It provides overview of security posture of devices.
+Endpoint Verification enables to build an inventory of devices that are accessing corporate apps. It provides overview of security posture of devices. Endpoint Verification consists of a Chrome extension installed on corporate devices. Employees can also install it on their unmanaged, personal devices. This extension gathers and reports device information, constantly syncing with Google Cloud. This information is used in finer access control.
 
 ![Alt text](img/endpoint-verification-flow.png?raw=true "endpoint-verification-flow")
 
@@ -32,7 +32,7 @@ On-premises network is extended to Google Cloud VPC network via Dedicated Interc
 
 ## Setup of Authentication and Authorization Layer
 
-HTTPS Load Balancer with Cloud Identity-Aware Proxy(IAP) is created. User connects to this proxy to access corporate applications. IAP performs authentication and authorization. IAP works with signed headers to secure applications. Users are added as Members to HTTPS Resources in IAP, with IAM Role - 'IAP-secured Web App User' to grant access. 
+Cloud Identity-Aware Proxy(IAP) is HTTPS Load Balancer that performs authentication and authorization. User connects to this proxy to access corporate applications. IAP works with signed headers to secure applications. Users are added as Members to HTTPS Resources in IAP, with IAM Roles to grant access. 
 
 
 ![Alt text](img/iap-on-prem.png?raw=true "iap-on-prem")
@@ -46,7 +46,7 @@ IAP Connector is used to route traffic secured by Cloud IAP to on-premises app. 
 
 ## DNS
 
-Public domain names are created for internal on-premises app and mapped to IAP Proxy IP address. These entries are created in domain manager.
+Public domain names are created for internal on-premises app and mapped to IAP Proxy IP address. Entries are created in domain manager. These url's are used by user to connect to corporate apps.
 
 
 ## Conclusion:
