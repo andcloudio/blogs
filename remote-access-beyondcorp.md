@@ -1,6 +1,6 @@
 # Remote Access with BeyondCorp
 
-![Alt text](img/micah-williams-lmFJOx7hPc4-unsplash-2.jpg?raw=true "Beyond Remote Access")
+<img align="center" src="img/micah-williams-lmFJOx7hPc4-unsplash-2.jpg">
 
 Traditionally companies have relied on perimeter security with firewall guarding the entry and exit of traffic into corporate network. With companies adopting cloud and workforce going mobile, this perimeter has become difficult to enforce. 
 
