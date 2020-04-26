@@ -53,7 +53,7 @@ Public domain names are created for internal on-premises app and mapped to IAP P
 
 ## Conclusion:
 
-With workforce going mobile, BeyondCorp model of security provides uniform user experience between local and remote access to enterprise resources.
+With most of the workforce working from remote location, BeyondCorp model of security provides uniform user experience between local and remote access to enterprise resources.
 
 
 Diagrams from: 
