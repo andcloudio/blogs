@@ -219,13 +219,13 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 ## Test Access
 
-- Use an incognito window in Chrome. Enter app URL, you are prompted for Google Signin. Enter credentials of user who was granted access in IAP. You should get access to the app.
+- Use an incognito window in Chrome. Enter app URL, you are prompted for Google Signin. Enter credentials of authorized user. You should get access to the app.
 
 ![Alt text](img/google-signin.png?raw=true "Google signin")
 
 ![Alt text](img/access.png?raw=true "access")
 
-- Try to access the app with an account that isn't authorized, you'll see a message saying that 'you don't have access'.
+- Try to access the app with an account that isn't authorized.
 
 ![Alt text](img/access-denied.png?raw=true "access denied")
 
