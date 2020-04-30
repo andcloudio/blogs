@@ -223,7 +223,7 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 ![Alt text](img/google-signin.png?raw=true "Google signin")
 
-
+![Alt text](img/access.png?raw=true "access")
 
 - Try to access the app with an account that isn't authorized, you'll see a message saying that 'you don't have access'.
 
