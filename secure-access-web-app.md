@@ -8,7 +8,7 @@ Granular access control policies can be applied based on attributes like User Id
 
 Internet-accessible URLs are created for Enterprise Apps, DNS mapping is created for domain name to point to HTTPS Load Balancer IP address.
 
-User connects to HTTPS Load Balancer. HTTPS Load Balancer checks if IAP is enabled for backend service. If IAP is enabled, User is redirected to Google Account Signin. If credentials are valid, IAP checks if user is authorized to access the resource. If users have appropriate Roles and Permissions, request is forwarded to backend service.
+User connects to HTTPS Load Balancer. HTTPS Load Balancer checks if IAP is enabled for backend service. If IAP is enabled, User is redirected to Google Account Signin page. If credentials are valid, IAP checks if user is authorized to access the resource. If user has appropriate Role and Permissions, request is forwarded to backend resource.
 
 This blogs gives an illustration of deployment of app and configuration of IAP.
 
@@ -30,7 +30,7 @@ gcloud services enable dns.googleapis.com
 gcloud compute addresses create address-name --global --ip-version IPV4
 gcloud compute addresses describe address-name --global
 
-## Create an domain name for app in Cloud DNS
+## Create a domain name for app in Cloud DNS
 
 ## Create 'A' record entry mapping domain name with static ip address. 
 
@@ -194,9 +194,7 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 - Set ‘User Type’ as Internal.
 
-- Enter Support email you want to display as a public contact.
-
-- Enter the Application name you want to display.
+- Enter Support email and Application name.
 
 - Click Save.
 
@@ -208,14 +206,10 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 - In the Add members dialog, add the email addresses of groups or individuals to whom you want to grant the 'IAP-secured Web App User' role for the project.
 
+- Turning on IAP for app, with toggle slider.
+
 ![Alt text](img/iap-config.png?raw=true "iap-config")
 
-
-## Turning on IAP
-
-- On the Identity-Aware Proxy page, under HTTPS Resources.
-
-- To turn on IAP for the app, toggle the on/off switch in the IAP column.
 
 ## Test Access
 
@@ -229,3 +223,7 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 ![Alt text](img/access-denied.png?raw=true "access denied")
 
+
+## Summary
+
+Identity-Aware proxy can give uniform authentication and authorization layer for apps deployed on cloud and on-premises.
