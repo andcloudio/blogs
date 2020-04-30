@@ -27,8 +27,10 @@ gcloud services enable dns.googleapis.com
 
 ## Reserve global static ip address
 
+```bash
 gcloud compute addresses create address-name --global --ip-version IPV4
 gcloud compute addresses describe address-name --global
+```
 
 ## Create a domain name for app in Cloud DNS
 
