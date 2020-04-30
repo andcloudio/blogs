@@ -136,7 +136,7 @@ metadata:
   name: www-example-com
 spec:
   domains:
-    - internal.andcloud.io
+    - [DOMAIN NAME OF APP]
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
