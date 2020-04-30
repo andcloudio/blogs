@@ -1,7 +1,0 @@
-apiVersion: networking.gke.io/v1beta1
-kind: ManagedCertificate
-metadata:
-  name: www-example-com
-spec:
-  domains:
-    - www.example.com
