@@ -29,12 +29,24 @@ gcloud services enable dns.googleapis.com
 
 ```bash
 gcloud compute addresses create address-name --global --ip-version IPV4
-gcloud compute addresses describe address-name --global
+STATIC_IP=`gcloud compute addresses describe address-name --global | awk 'NR == 1 {print $2}'`
 ```
 
 ## Create a domain name for app in Cloud DNS
 
 ## Create 'A' record entry mapping domain name with static ip address. 
+
+```bash
+DOMAIN_NAME="Enter domain name used for apps"
+ZONE_NAME="Enter zone name of domain"
+
+gcloud dns record-sets transaction start --zone=${ZONE_NAME}
+
+gcloud dns record-sets transaction add ${STATIC_IP} --name=${DOMAIN_NAME} \
+  --ttl="30" \
+  --type="A" \
+  --zone=${ZONE_NAME}
+```
 
 ## Create GKE Cluster
 
