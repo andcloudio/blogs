@@ -228,4 +228,4 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 ## Summary
 
-Identity-Aware proxy can give uniform authentication and authorization layer for apps deployed on cloud and on-premises.
+Identity-Aware proxy can give uniform authentication and authorization layer across applications without any application code.
