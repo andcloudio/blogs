@@ -66,7 +66,6 @@ gcloud container clusters create cluster-name \
   --enable-autoscaling --max-nodes=5 --min-nodes=1 \
   --enable-master-authorized-networks \
   --enable-private-nodes \
-  --master-ipv4-cidr "172.16.0.0/28" \
   --enable-ip-alias 
 ```
 
