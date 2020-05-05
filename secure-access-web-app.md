@@ -178,23 +178,6 @@ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.ya
 ingress.yaml
 
 ```yaml
-apiVersion: networking.gke.io/v1beta1
-kind: ManagedCertificate
-metadata:
-  name: www-example-com
-spec:
-  domains:
-    - [DOMAIN NAME OF APP]
----
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: www-example-com
-  namespace: default
-spec:
-  prefix: /
-  service: internal-portal:80
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -206,6 +189,23 @@ spec:
       targetPort: 8080
   selector:
     service: ambassador
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: www-example-com
+  namespace: default
+spec:
+  prefix: /
+  service: internal-portal:80
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: www-example-com
+spec:
+  domains:
+    - [DOMAIN NAME OF APP]
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
