@@ -14,7 +14,6 @@ This blogs gives an illustration of deployment of app and configuration of IAP.
 
 ```bash
 PROJECT_ID="Enter project-name"
-ZONE=us-central1-a
 
 gcloud config set project ${PROJECT_ID}
 
@@ -36,30 +35,65 @@ STATIC_IP=`gcloud compute addresses describe address-name --global | awk 'NR == 
 
 ## Create 'A' record entry mapping domain name with static ip address. 
 
+## Create a custom network and subnetwork.
+
 ```bash
-DOMAIN_NAME="Enter domain name used for apps"
-ZONE_NAME="Enter zone name of domain"
+REGION=us-central1
+ZONE=us-central1-a
+NETWORK_NAME=web-network
+SUBNET_NAME=web-subnet
+IP_RANGE=10.1.1.0/24
 
-gcloud dns record-sets transaction start --zone=${ZONE_NAME}
+gcloud compute networks create ${NETWORK_NAME} \
+--subnet-mode=custom
 
-gcloud dns record-sets transaction add ${STATIC_IP} --name=${DOMAIN_NAME} \
-  --ttl="30" \
-  --type="A" \
-  --zone=${ZONE_NAME}
+gcloud compute networks subnets create ${SUBNET_NAME} \
+--network=${NETWORK_NAME} \
+--range=${IP_RANGE} \
+--region=${REGION}
 ```
 
-## Create GKE Cluster
+## Create Private GKE Cluster
 
 ```bash
 gcloud container clusters create cluster-name \
-  --enable-ip-alias \
+  --network=${NETWORK_NAME} \
+  --subnetwork=${SUBNET_NAME} \
+  --zone ${ZONE} \
+  --cluster-version "latest" \
   --machine-type=n1-standard-4 \
-  --enable-autoscaling --max-nodes=5 --min-nodes=1
+  --image-type "COS" \
+  --enable-autoscaling --max-nodes=5 --min-nodes=1 \
+  --enable-master-authorized-networks \
+  --enable-private-nodes \
+  --master-ipv4-cidr "172.16.0.0/28" \
+  --enable-ip-alias 
 ```
 
-## Fetch kubeconfig
+## Create NAT router to enable download of container images
 
 ```bash
+gcloud compute routers create nat-router \
+  --network=${NETWORK_NAME} \
+  --region ${REGION}
+  
+gcloud compute routers nats create nat-config \
+    --router-region ${REGION} \
+    --router nat-router \
+    --nat-all-subnet-ip-ranges \
+    --auto-allocate-nat-external-ips
+```
+
+## Use Cloud Shell to connect to cluster
+
+```bash
+SHELL_IP=`dig +short myip.opendns.com @resolver1.opendns.com`
+
+gcloud container clusters update cluster-name \
+    --zone ${ZONE} \
+    --enable-master-authorized-networks \
+    --master-authorized-networks ${SHELL_IP}/32
+
 gcloud container clusters get-credentials cluster-name \
   --zone ${ZONE} \
   --project ${PROJECT_ID}
@@ -195,6 +229,7 @@ kubectl apply -f ingress.yaml
 ```bash
 FIREWALL_RULE_NAME=allow-lb
 gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
+--network=${NETWORK_NAME} \
 --allow=tcp \
 --source-ranges=130.211.0.0/22,35.191.0.0/16 \
 --description="Allow traffic from load balancer"
