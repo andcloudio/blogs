@@ -32,6 +32,12 @@ STATIC_IP=`gcloud compute addresses describe address-name --global | awk 'NR == 
 ```
 
 ## Create a domain name for app in Cloud DNS
+```bash
+SUB_DOMAIN="Enter sub-domain"
+ZONE_NAME="Enter subdomain name"
+DESCRIPTION="Enter description"
+gcloud dns managed-zones create ${ZONE_NAME} --dns-name=${SUB_DOMAIN} --description ${DESCRIPTION}
+```
 
 ## Create 'A' record entry mapping domain name with static ip address. 
 
@@ -205,7 +211,7 @@ metadata:
   name: www-example-com
 spec:
   domains:
-    - [DOMAIN NAME OF APP]
+    - SUB_DOMAIN_NAME
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -221,6 +227,8 @@ spec:
 ```
 
 ```bash
+sed -i -e "s/SUB_DOMAIN_NAME/${SUB_DOMAIN}/g" ingress.yaml
+
 kubectl apply -f ingress.yaml
 ```
 
@@ -233,6 +241,37 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 --allow=tcp \
 --source-ranges=130.211.0.0/22,35.191.0.0/16 \
 --description="Allow traffic from load balancer"
+```
+
+## Create device access level policy
+
+device_condition.yaml
+
+```yaml
+- devicePolicy:
+    allowedEncryptionStatuses:
+      - ENCRYPTED
+    osConstraints:
+      - osType: DESKTOP_MAC
+        minimumVersion: 10.14.6
+    requireScreenlock: true
+    requireAdminApproval: true
+    requireCorpOwned: true
+  regions:
+    - US
+    - IN
+```
+
+```bash
+ORG_ID=`gcloud organizations list | awk 'NR == 2 {print $2}'`
+POLICY_NAME=`gcloud access-context-manager policies list --organization=${ORG_ID} | awk 'NR == 2 {print $1}'`
+
+ACCESS_LEVEL_NAME=device_trust
+
+gcloud access-context-manager levels create ${ACCESS_LEVEL_NAME} \
+   --title ${ACCESS_LEVEL_NAME} \
+   --basic-level-spec device_conditions.yaml \
+   --policy=${POLICY_NAME}
 ```
 
 ## Setup IAP
@@ -253,7 +292,7 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 - Select the resource by checking the box to its left. On the right side panel, click Add Member.
 
-- In the Add members dialog, add the email addresses of groups or individuals to whom you want to grant the 'IAP-secured Web App User' role for the project.
+- In the Add members dialog, add the email addresses of groups or individuals. Grant 'IAP-secured Web App User' role. Select access level 'device trust' created previously. 
 
 - Turning on IAP for app, with toggle slider.
 
