@@ -14,7 +14,6 @@ This blogs gives an illustration of deployment of app and configuration of IAP.
 
 ```bash
 PROJECT_ID="Enter project-name"
-ZONE=us-central1-a
 
 gcloud config set project ${PROJECT_ID}
 
@@ -29,25 +28,78 @@ gcloud services enable dns.googleapis.com
 
 ```bash
 gcloud compute addresses create address-name --global --ip-version IPV4
-gcloud compute addresses describe address-name --global
+STATIC_IP=`gcloud compute addresses describe address-name --global | awk 'NR == 1 {print $2}'`
 ```
 
 ## Create a domain name for app in Cloud DNS
+```bash
+SUB_DOMAIN="Enter sub-domain"
+ZONE_NAME="Enter subdomain name"
+DESCRIPTION="Enter description"
+gcloud dns managed-zones create ${ZONE_NAME} --dns-name=${SUB_DOMAIN} --description ${DESCRIPTION}
+```
 
 ## Create 'A' record entry mapping domain name with static ip address. 
 
-## Create GKE Cluster
+## Create a custom network and subnetwork.
+
+```bash
+REGION=us-central1
+ZONE=us-central1-a
+NETWORK_NAME=web-network
+SUBNET_NAME=web-subnet
+IP_RANGE=10.1.1.0/24
+
+gcloud compute networks create ${NETWORK_NAME} \
+--subnet-mode=custom
+
+gcloud compute networks subnets create ${SUBNET_NAME} \
+--network=${NETWORK_NAME} \
+--range=${IP_RANGE} \
+--region=${REGION}
+```
+
+## Create Private GKE Cluster
 
 ```bash
 gcloud container clusters create cluster-name \
-  --enable-ip-alias \
+  --network=${NETWORK_NAME} \
+  --subnetwork=${SUBNET_NAME} \
+  --zone ${ZONE} \
+  --cluster-version "latest" \
   --machine-type=n1-standard-4 \
-  --enable-autoscaling --max-nodes=5 --min-nodes=1
+  --image-type "COS" \
+  --enable-autoscaling --max-nodes=5 --min-nodes=1 \
+  --enable-master-authorized-networks \
+  --enable-private-nodes \
+  --master-ipv4-cidr "172.16.0.0/28" \
+  --enable-ip-alias 
 ```
 
-## Fetch kubeconfig
+## Create NAT router to enable download of container images
 
 ```bash
+gcloud compute routers create nat-router \
+  --network=${NETWORK_NAME} \
+  --region ${REGION}
+  
+gcloud compute routers nats create nat-config \
+    --router-region ${REGION} \
+    --router nat-router \
+    --nat-all-subnet-ip-ranges \
+    --auto-allocate-nat-external-ips
+```
+
+## Use Cloud Shell to connect to cluster
+
+```bash
+SHELL_IP=`dig +short myip.opendns.com @resolver1.opendns.com`
+
+gcloud container clusters update cluster-name \
+    --zone ${ZONE} \
+    --enable-master-authorized-networks \
+    --master-authorized-networks ${SHELL_IP}/32
+
 gcloud container clusters get-credentials cluster-name \
   --zone ${ZONE} \
   --project ${PROJECT_ID}
@@ -132,23 +184,6 @@ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.ya
 ingress.yaml
 
 ```yaml
-apiVersion: networking.gke.io/v1beta1
-kind: ManagedCertificate
-metadata:
-  name: www-example-com
-spec:
-  domains:
-    - [DOMAIN NAME OF APP]
----
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: www-example-com
-  namespace: default
-spec:
-  prefix: /
-  service: internal-portal:80
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -160,6 +195,23 @@ spec:
       targetPort: 8080
   selector:
     service: ambassador
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: www-example-com
+  namespace: default
+spec:
+  prefix: /
+  service: internal-portal:80
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: www-example-com
+spec:
+  domains:
+    - SUB_DOMAIN_NAME
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -175,6 +227,8 @@ spec:
 ```
 
 ```bash
+sed -i -e "s/SUB_DOMAIN_NAME/${SUB_DOMAIN}/g" ingress.yaml
+
 kubectl apply -f ingress.yaml
 ```
 
@@ -183,9 +237,41 @@ kubectl apply -f ingress.yaml
 ```bash
 FIREWALL_RULE_NAME=allow-lb
 gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
+--network=${NETWORK_NAME} \
 --allow=tcp \
 --source-ranges=130.211.0.0/22,35.191.0.0/16 \
 --description="Allow traffic from load balancer"
+```
+
+## Create device access level policy
+
+device_condition.yaml
+
+```yaml
+- devicePolicy:
+    allowedEncryptionStatuses:
+      - ENCRYPTED
+    osConstraints:
+      - osType: DESKTOP_MAC
+        minimumVersion: 10.14.6
+    requireScreenlock: true
+    requireAdminApproval: true
+    requireCorpOwned: true
+  regions:
+    - US
+    - IN
+```
+
+```bash
+ORG_ID=`gcloud organizations list | awk 'NR == 2 {print $2}'`
+POLICY_NAME=`gcloud access-context-manager policies list --organization=${ORG_ID} | awk 'NR == 2 {print $1}'`
+
+ACCESS_LEVEL_NAME=device_trust
+
+gcloud access-context-manager levels create ${ACCESS_LEVEL_NAME} \
+   --title ${ACCESS_LEVEL_NAME} \
+   --basic-level-spec device_conditions.yaml \
+   --policy=${POLICY_NAME}
 ```
 
 ## Setup IAP
@@ -206,7 +292,7 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 - Select the resource by checking the box to its left. On the right side panel, click Add Member.
 
-- In the Add members dialog, add the email addresses of groups or individuals to whom you want to grant the 'IAP-secured Web App User' role for the project.
+- In the Add members dialog, add the email addresses of groups or individuals. Grant 'IAP-secured Web App User' role. Select access level 'device trust' created previously. 
 
 - Turning on IAP for app, with toggle slider.
 
@@ -215,9 +301,11 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 ## Test Access
 
-- Use an incognito window in Chrome. Enter app URL, you are prompted for Google Signin. Enter credentials of authorized user. You should get access to the app.
+- Use an incognito window in Chrome. Enter app URL, you are prompted for Google Signin. 
 
 ![Alt text](img/google-signin.png?raw=true "Google signin")
+
+- Enter credentials of authorized user. You should get access to the app.
 
 ![Alt text](img/access.png?raw=true "access")
 
@@ -228,4 +316,4 @@ gcloud compute firewall-rules create ${FIREWALL_RULE_NAME} \
 
 ## Summary
 
-Identity-Aware proxy can give uniform authentication and authorization layer for apps deployed on cloud and on-premises.
+Identity-Aware proxy can give uniform authentication and authorization layer across applications without any application code.
