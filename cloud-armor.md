@@ -50,7 +50,7 @@ gcloud compute security-policies create ${SECURITY_POLICY_NAME} \
   --description "policy for users"
 ```
 
-## Update Default Rule in Security Policy to deny traffic
+## Update Default Rule in Security Policy to deny all traffic
 
 ```bash
 gcloud compute security-policies rules update 2147483647 \
@@ -59,17 +59,27 @@ gcloud compute security-policies rules update 2147483647 \
 ```
 
 
-## Define allow Security Policy Rules
+## Define Security Policy Rules
 
 ```bash
+
 gcloud compute security-policies rules create 1000 \
   --security-policy ${SECURITY_POLICY_NAME} \
-  --expression "origin.region_code == 'IN' 
-  && inIpRange(origin.ip, '117.198.122.0/24')
-  && evaluatePreconfiguredExpr('sqli-stable')
-  && evaluatePreconfiguredExpr('xss-stable')" \
+  --expression "evaluatePreconfiguredExpr('sqli-stable')" \
+  --action "deny-403" \
+  --description "mitigate SQLi attack"
+
+gcloud compute security-policies rules create 2000 \
+  --security-policy ${SECURITY_POLICY_NAME} \
+  --expression "evaluatePreconfiguredExpr('xss-stable')" \
+  --action "deny-403" \
+  --description "mitigate XSS attack"
+
+gcloud compute security-policies rules create 3000 \
+  --security-policy ${SECURITY_POLICY_NAME} \
+  --expression "origin.region_code == 'IN' && inIpRange(origin.ip, '171.76.120.0/24')" \
   --action "allow" \
-  --description "allow traffic from IN with specific CIDR, block SQLi and XSS"
+  --description "allow traffic from IN with specific CIDR"
 ```
 
 ## Creating a BackendConfig
@@ -149,9 +159,21 @@ spec:
 
 Wait for ingress resource to created.
 
+```bash
 curl ${STATIC_IP}
 
 Hello, world!
 Version: 1.0.0
+```
 
-curl -v "${STATIC_IP}/?id=1 or 1=1"
+Try SQL injection
+
+```bash
+curl http://${STATIC_IP}/?id=1%20or%201=1
+
+403 Forbidden
+```
+
+## Summary
+
+When hosting any Web Application or API protecting against threats and unwanted traffic is important. Cloud Armor gives a simple interface it integrate security policies with external HTTP(S) Load Balancers.
