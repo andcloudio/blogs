@@ -4,9 +4,9 @@ Today Enterprises are using different cloud service providers for IaaS, PaaS and
 
 ![Alt text](img/casb.png?raw=true "casb")
 
-When using Iaas, PaaS or SaaS, Security is a shared responsibility. Service Provider is responsible for infrastructure security, User is responsible for Securing Access and Data.
+When using Iaas, PaaS or SaaS, Security is a shared responsibility. Cloud Service Provider is responsible for infrastructure security, User is responsible for Securing Access and Data.
 
-How do you secure Access and Data across different service providers which are outside your enterprise perimeter?
+How to secure Access and Data across different cloud service providers which are outside your enterprise perimeter?
 
 This is where Cloud Access Security Broker (CASB) comes in. CASB acts as intermediary between users and cloud service providers. CASB helps with,
 
@@ -22,7 +22,7 @@ This is where Cloud Access Security Broker (CASB) comes in. CASB acts as interme
 
 ## Compliance
 
-- Ensure compliance to HIPAA or HITECH for health organization, PCI for retail, FINRA for financial services organization.
+- Ensure compliance to HIPAA or HITECH for health organization, PCI for retail, FINRA for financial services.
 
 ## Data Security
 
@@ -38,6 +38,8 @@ This is where Cloud Access Security Broker (CASB) comes in. CASB acts as interme
 
 - Identify compromised accounts.
 
+
+
 CASB can be deployed as 
 
 ## API Scanner
@@ -50,7 +52,7 @@ User connects to CASB and CASB proxies connection to SaaS applications, with thi
 
 ## Reverse Proxy 
 
-CASB acts as SSO agent. SaaS applications forward connections to CASB for authentication. CASB will use IDaaS used by organization to authenticate user and session is established with CASB in path between user and SaaS application. This can control access from managed and un-managed devices and provide real time DLP. 
+CASB acts as SSO agent. SaaS applications forward connections to CASB for authentication. CASB will use IDaaS used by organization to authenticate user and session is established with CASB in path between user and SaaS application. Reverse Proxy can control access from managed and un-managed devices and provide real time DLP. 
 
 ## Conclusion
 
