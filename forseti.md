@@ -6,7 +6,7 @@ Forseti Security is a open source security tool which provides visibility and mo
 
 ![Alt text](img/forseti-gcp.png?raw=true "forseti")
 
-Forseti security modules are 
+Forseti security modules include 
 
 - Inventory 
 
@@ -107,6 +107,6 @@ on Security Command Center Findings we see FIREWALL_BLACKLIST_VIOLATION
 
 We can add new rules and develop custom rules. Forseti has extensible architecture.
 
-Summary:
+## Conclusion
 Visibility and Control are essential when managing cloud deployments. 
 Forseti security is one of security tool that should be there in your GCP environment. 
