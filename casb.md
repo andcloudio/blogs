@@ -1,6 +1,6 @@
 # Get Visibility and Control into your SaaS Apps Usage
 
-Today Enterprises are using different cloud service providers for IaaS, PaaS and SaaS to enhance productivity and reduce cost.
+Today Enterprises are using different cloud service providers for IaaS, PaaS and SaaS apps to enhance productivity and reduce cost.
 
 ![Alt text](img/casb.png?raw=true "casb")
 
